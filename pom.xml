@@ -86,9 +86,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.operatr</groupId>
+			<groupId>io.factorhouse</groupId>
 			<artifactId>kpow-streams-agent</artifactId>
-			<version>0.2.8</version>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 

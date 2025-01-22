@@ -16,7 +16,8 @@
 
 package kafka.streams.word.count;
 
-import io.operatr.kpow.StreamsRegistry;
+import io.factorhouse.kpow.StreamsRegistry;
+import io.factorhouse.kpow.key.ClusterIdKeyStrategy;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.KafkaStreams;
@@ -65,8 +66,12 @@ public class KafkaStreamsWordCountApplication {
         // Create a kPow StreamsRegistry
         StreamsRegistry registry = new StreamsRegistry(properties);
 
+        // Specify the key strategy when writing metrics to the internal Kafka topic
+        // props are java.util.Properties describing the Kafka Connection
+        ClusterIdKeyStrategy keyStrat = new ClusterIdKeyStrategy(properties);
+
         // Register your KafkaStreams and Topology instances with the StreamsRegistry
-        registry.register(streams, topology);
+        registry.register(streams, topology, keyStrat);
     }
 
     public static class WordCountProcessorApplication {

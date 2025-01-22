@@ -31,9 +31,9 @@ Include the Kpow Streams Agent library in your application:
 
 ```xml
 <dependency>
-  <groupId>io.operatr</groupId>
+  <groupId>io.factorhouse</groupId>
   <artifactId>kpow-streams-agent</artifactId>
-  <version>0.2.8</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
@@ -68,9 +68,12 @@ public static void main(String[] args) {
         
         StreamsRegistry registry = new StreamsRegistry(properties);
 
+        // Specify the key strategy when writing metrics to the internal Kafka topic
+        // props are java.util.Properties describing the Kafka Connection
+        ClusterIdKeyStrategy keyStrat = new ClusterIdKeyStrategy(factory.getStreamsConfiguration());
+      
         // Register your KafkaStreams and Topology instances with the StreamsRegistry
-        
-        registry.register(streams, topology);
+        registry.register(streams, topology, keyStrat);
     }
 ```
 ----
